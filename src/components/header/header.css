@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+
+.header {
+  background-color: #003580;
+  color: white;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.headerContainer {
+  width: 100%;
+  max-width: 1140px;
+  margin: 20px 0px 100px 0px;
+}
+
+.headerContainer.listMode {
+  margin: 20px 0px 0px 0px;
+}
+
+.headerList {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.headerListItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.headerListItem.active {
+  border: 2px solid yellow;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.headerDesc {
+  margin: 20px 0px;
+}
+
+.headerBtn {
+  background-color: #0071c2;
+  color: white;
+  font-weight: 500;
+  border-radius:2px;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-family: "Inter";
+}
+
+.headerSearch {
+  height: 30px;
+  background-color: white;
+  border: 4px solid #febb02;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px 0px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: -25px;
+  width: 100%;
+  max-width: 1140px;
+}
+
+.headerIcon {
+  color: lightgray;
+}
+
+.headerSearchItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.headerSearchInput {
+  border: none;
+  outline: none;
+}
+
+.headerSearchText {
+  color: lightgray;
+  cursor: pointer;
+}
+
+.date {
+  position: absolute;
+  top: 50px;
+  z-index: 2;
+}
+
+.options {
+  z-index: 2;
+  position: absolute;
+  top: 50px;
+  background-color: white;
+  color: gray;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
+}
+
+.optionItem {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.optionCounter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: black;
+}
+
+.optionCounterButton {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #0071c2;
+  color: #0071c2;
+  cursor: pointer;
+  background-color: white;
+}
+
+.optionCounterButton:disabled {
+  cursor: not-allowed;
+}
+
+
+.headerBut {
+  background-color: #0071c2;
+  color: white;
+  font-weight: 500;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  width:120px;
+  height: 51px;
+  border-radius: 4px;
+  position: relative;
+  margin-left: 36px;
+  margin-top: -0.5px; 
+  left:35px;
+  margin-top: -1px;  
+
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.welcomeUser {
+  color: white;
+  font-weight: 500;
+}
+
+/* Remove the red color styles for logout button */
+.logoutBtn {
+  background-color: #0071c2; /* Same blue as the sign in button */
+}
+
+.logoutBtn:hover {
+  background-color: #00487a; /* Slightly darker blue on hover */
+}
+
+/* Update styles for city alert popup to appear below the search input */
+.cityAlert {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  margin-top: 5px;
+  animation: slideDown 0.3s ease-out;
+}
+
+.cityAlertContent {
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
+  padding: 12px 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cityAlertClose {
+  background: none;
+  border: none;
+  color: #856404;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0 0 0 10px;
+  line-height: 1;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+
+

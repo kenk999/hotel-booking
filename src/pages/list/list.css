@@ -1,0 +1,169 @@
+.listContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.listWrapper {
+  width: 100%;
+  max-width: 1140px;
+  display: flex;
+  gap: 20px;
+}
+
+.listSearch {
+  flex: 1;
+  background-color: #febb02;
+  padding: 10px;
+  border-radius: 10px;
+  position: sticky;
+  top: 10px;
+  height: max-content;
+}
+
+.lsTitle {
+  font-size: 20px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.lsItem {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.lsItem>label {
+  font-size: 12px;
+}
+
+.lsItem>input {
+  height: 30px;
+  border: none;
+  padding: 5px;
+}
+
+.lsItem>span {
+  height: 30px;
+  padding: 5px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.lsTypeSelect {
+  height: 30px;
+  border: none;
+  padding: 5px;
+}
+
+.lsOptions {
+  padding: 10px;
+}
+
+.lsOptionItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 12px;
+}
+
+.lsOptionInput {
+  width: 50px;
+}
+
+.searchButton {
+  padding: 10px;
+  background-color: #0071c2;
+  color: white;
+  border: none;
+  width: 100%;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.guestCapacityInfo {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  font-size: 13px;
+  text-align: center;
+  color: #333;
+}
+
+.listResult {
+  flex: 3;
+}
+
+.noResults {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  text-align: center;
+  color: #555;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.noResults h3 {
+  margin-bottom: 10px;
+}
+
+.errorResults {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #c62828;
+  background-color: #ffebee;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+}
+
+/* New styles for guest capacity filtering */
+.loadingResults {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #555;
+  font-size: 16px;
+}
+
+.resultsHeader {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.resultsCount {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.guestCapacityNote {
+  font-size: 14px;
+  color: #0071c2;
+}
+
+@media screen and (max-width: 768px) {
+  .listWrapper {
+    flex-direction: column;
+  }
+
+  .listSearch {
+    position: relative;
+    margin-bottom: 20px;
+  }
+}

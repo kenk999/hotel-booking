@@ -1,0 +1,24 @@
+.listContainers,
+.listWrappers,
+.align {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.listResults {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* ✅ centers each SearchItem horizontally */
+  gap: 20px;              /* space between items */
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+
+
+.listResults .searchItem {
+  width: 1000px;  /* or 1100px if you want it even wider */
+}
+

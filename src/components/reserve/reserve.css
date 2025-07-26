@@ -1,0 +1,234 @@
+.reserve {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.418);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.rContainer {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.rClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: #555;
+  font-size: 24px;
+}
+
+.rClose:hover {
+  color: #000;
+}
+
+.rItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.rItemInfo {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rTitle {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.rDesc {
+  font-size: 14px;
+  color: #555;
+}
+
+.rMax {
+  font-size: 14px;
+}
+
+.rPrice {
+  font-weight: 500;
+}
+
+.rSelectRooms {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.room {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.rButton {
+  border: none;
+  padding: 10px 20px;
+  background-color: #0071c2;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.rButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.rRoomDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.rRoomUnavailable {
+  color: #e74c3c;
+  font-size: 12px;
+}
+
+.rSelectTitle {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 15px 0;
+  display: block;
+}
+
+.rDates {
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+.rError {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.rCapacityError {
+  background-color: #fff3e0;
+  color: #e65100;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.rSuccess {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.rLoading, .rNoRooms {
+  text-align: center;
+  padding: 20px;
+  color: #555;
+}
+
+.rSummary {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.rSummaryTitle {
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.rSummaryItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+/* New styles for capacity meter */
+.rGuestInfo {
+  background-color: #e3f2fd;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.rGuestCount {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.rCapacityInfo {
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rCapacityMeter {
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.rCapacityFill {
+  height: 100%;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.rCapacityText {
+  font-size: 13px;
+  color: #555;
+}
+
+.rCapacitySufficient {
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.rCapacityInsufficient {
+  color: #e65100;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .rItem {
+    flex-direction: column;
+  }
+  
+  .rSelectRooms {
+    width: 100%;
+  }
+}
