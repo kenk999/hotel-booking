@@ -10,6 +10,18 @@ const INITIAL_STATE = {
   },
 };
 
+// Helper function to get default dates
+const getDefaultDates = () => {
+  const today = new Date();
+  const tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 1);
+  return [{
+    startDate: today,
+    endDate: tomorrow,
+    key: "selection"
+  }];
+};
+
 export const SearchContext = createContext(INITIAL_STATE);
 
 const SearchReducer = (state, action) => {

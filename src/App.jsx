@@ -10,6 +10,7 @@ import Login from "./login/Login.jsx";
 import Mumbai from "./components/mumbai/Mumbai.jsx";
 import Delhi from "./components/delhi/Delhi.jsx";
 import Bengaluru from "./components/bengaluru/Bengaluru.jsx";
+import ComingSoon from "./components/comingSoon/ComingSoon.jsx";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext.jsx";
 import "./app.css";
@@ -27,6 +28,10 @@ function App() {
         <Route path="/mumbai" element={<Mumbai/>}/>
         <Route path="/delhi" element={<Delhi/>}/>
         <Route path="/bengaluru" element={<Bengaluru/>}/>
+        <Route path="/flights" element={<ComingSoon/>}/>
+        <Route path="/car-rentals" element={<ComingSoon/>}/>
+        <Route path="/attractions" element={<ComingSoon/>}/>
+        <Route path="/airport-taxis" element={<ComingSoon/>}/>
       </Routes>
     </BrowserRouter>
   );

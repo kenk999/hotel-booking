@@ -42,23 +42,132 @@ const list=await Promise.all(cities.map((city)=>{
 
 export const getHotels = async (req, res, next) => {
   try {
-    const { city, type } = req.query;
-    
+    const {
+      city,
+      type,
+      min,
+      max,
+      adult,
+      children,
+      startDate,
+      endDate,
+      search,
+      featured,
+      limit,
+    } = req.query;
+
     let query = {};
-    
-    // Only add city filter if city is provided and not empty
-    if (city && city.trim() !== '' && city !== 'undefined') {
-      query.city = city.trim();
+
+    // Handle featured
+    if (featured === "true") {
+      query.featured = true;
     }
-    
-    // Only add type filter if type is provided and not empty
-    if (type && type.trim() !== '' && type !== 'undefined') {
-      query.type = type.trim();
+
+    // Handle search
+    if (search && search.trim() !== "" && search !== "undefined") {
+      const searchRegex = new RegExp(search.trim(), "i");
+      query.$or = [
+        { name: { $regex: searchRegex } },
+        { city: { $regex: searchRegex } },
+      ];
+    } else {
+      if (city && city.trim() !== "" && city !== "undefined") {
+        query.city = city.trim();
+      }
+      if (type && type.trim() !== "" && type !== "undefined") {
+        query.type = type.trim();
+      }
     }
-    
-    const hotels = await Hotel.find(query);
-    res.status(200).json(hotels);
+
+    // Handle price range
+    if (min || max) {
+      query.cheapestPrice = {};
+      if (min && !isNaN(parseFloat(min))) {
+        query.cheapestPrice.$gte = parseFloat(min);
+      }
+      if (max && !isNaN(parseFloat(max))) {
+        query.cheapestPrice.$lte = parseFloat(max);
+      }
+    }
+
+    const hotels = await Hotel.find(query).limit(parseInt(limit) || 100);
+    const totalGuests = parseInt(adult || 0) + parseInt(children || 0);
+
+    if (!totalGuests || totalGuests <= 1) {
+      return res.status(200).json(hotels);
+    }
+
+    // Guest filtering logic
+    const filteredHotels = [];
+
+    for (const hotel of hotels) {
+      try {
+        if (!hotel.rooms || hotel.rooms.length === 0) continue;
+
+        const roomPromises = hotel.rooms.map(async (roomId) => {
+          try {
+            return await Room.findById(roomId);
+          } catch {
+            return null;
+          }
+        });
+
+        const rooms = (await Promise.all(roomPromises)).filter(Boolean);
+
+        if (rooms.length === 0) continue;
+
+        let totalAvailableCapacity = 0;
+
+        for (const room of rooms) {
+          if (!room.roomNumbers || room.roomNumbers.length === 0) continue;
+
+          let availableRoomCount = 0;
+
+          for (const roomNumber of room.roomNumbers) {
+            let isAvailable = true;
+
+            if (
+              startDate &&
+              endDate &&
+              roomNumber.unavailableDates &&
+              roomNumber.unavailableDates.length > 0
+            ) {
+              const checkInDate = new Date(startDate);
+              const checkOutDate = new Date(endDate);
+
+              for (const unavailableDate of roomNumber.unavailableDates) {
+                const unavailableDateObj = new Date(unavailableDate);
+
+                if (
+                  unavailableDateObj >= checkInDate &&
+                  unavailableDateObj < checkOutDate
+                ) {
+                  isAvailable = false;
+                  break;
+                }
+              }
+            }
+
+            if (isAvailable) {
+              availableRoomCount++;
+            }
+          }
+
+          totalAvailableCapacity +=
+            availableRoomCount * (room.maxPeople || 1);
+        }
+
+        if (totalAvailableCapacity >= totalGuests) {
+          filteredHotels.push(hotel);
+        }
+      } catch {
+        continue;
+      }
+    }
+
+    res.status(200).json(filteredHotels);
   } catch (err) {
+    console.error("Error in getHotels:", err);
     next(err);
   }
 };

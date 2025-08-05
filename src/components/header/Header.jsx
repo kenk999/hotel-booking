@@ -50,7 +50,7 @@ const{dispatch}=useContext(SearchContext)
       const normalizedDestination = destination.trim();
       if (normalizedDestination === "") {
         // Allow empty destination (show all)
-        dispatch({ type: "NEW_SEARCH", payload: { destination: "", date, options } });
+        dispatch({ type: "NEW_SEARCH", payload: { city: "", date, options } });
         navigate("/hotels", { state: { destination: "", date, options } });
         return;
       }
@@ -62,7 +62,7 @@ const{dispatch}=useContext(SearchContext)
       
       if (matchedCity) {
         // If city is allowed, proceed with search using the properly capitalized city name
-        dispatch({ type: "NEW_SEARCH", payload: { destination: matchedCity, date, options } });
+        dispatch({ type: "NEW_SEARCH", payload: { city: matchedCity, date, options } });
         navigate("/hotels", { state: { destination: matchedCity, date, options } });
       } else {
         // If city is not allowed, show alert
@@ -90,20 +90,19 @@ const{dispatch}=useContext(SearchContext)
                  <span>Stays</span>
             </div>
   
-            <div className="headerListItem">
+            <div className="headerListItem" onClick={() => navigate('/flights')}>
                  <FontAwesomeIcon icon={faPlane} />
                  <span>Flights</span>
-
             </div>
-            <div className="headerListItem">
+            <div className="headerListItem" onClick={() => navigate('/car-rentals')}>
                  <FontAwesomeIcon icon={faCar} />
                  <span>Car rentals</span>
             </div>
-               <div className="headerListItem">
+               <div className="headerListItem" onClick={() => navigate('/attractions')}>
                  <FontAwesomeIcon icon={faBed} />
                  <span>Attractions</span>
             </div>
-               <div className="headerListItem">
+               <div className="headerListItem" onClick={() => navigate('/airport-taxis')}>
                  <FontAwesomeIcon icon={faTaxi} />
                  <span>Airport taxis</span>
             </div>

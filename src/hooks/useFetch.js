@@ -10,11 +10,19 @@ function useFetch(url){
 
 useEffect(
     function(){
+        // Only fetch if URL is provided and not null
+        if (!url) {
+            setData([]);
+            setLoading(false);
+            return;
+        }
+        
         const fetchData=async function(){
             setLoading(true)
+            setError(false) // Reset error state
             try{
-            const res=await axios.get(url);
-            setData(res.data);
+                const res=await axios.get(url);
+                setData(res.data);
             }catch(err){
                 setError(err)
             }

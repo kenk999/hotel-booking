@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  animation: fadeInUp 0.6s ease-out;
 }
 
 .listWrapper {
@@ -42,6 +43,13 @@
   height: 30px;
   border: none;
   padding: 5px;
+  border-radius: 4px;
+  transition: box-shadow 0.3s ease;
+}
+
+.lsItem>input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 113, 194, 0.2);
 }
 
 .lsItem>span {
@@ -57,6 +65,13 @@
   height: 30px;
   border: none;
   padding: 5px;
+  border-radius: 4px;
+  transition: box-shadow 0.3s ease;
+}
+
+.lsTypeSelect:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 113, 194, 0.2);
 }
 
 .lsOptions {
@@ -73,6 +88,15 @@
 
 .lsOptionInput {
   width: 50px;
+  padding: 4px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: box-shadow 0.3s ease;
+}
+
+.lsOptionInput:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 113, 194, 0.2);
 }
 
 .searchButton {
@@ -83,6 +107,13 @@
   width: 100%;
   font-weight: 500;
   cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.searchButton:hover {
+  background-color: #005fa3;
+  transform: translateY(-2px);
 }
 
 .guestCapacityInfo {
@@ -144,6 +175,7 @@
   margin-bottom: 15px;
   padding-bottom: 10px;
   border-bottom: 1px solid #e0e0e0;
+  animation: fadeInLeft 0.5s ease-out;
 }
 
 .resultsCount {
@@ -155,6 +187,34 @@
 .guestCapacityNote {
   font-size: 14px;
   color: #0071c2;
+}
+
+.universalSearchNote {
+  color: #666;
+  font-weight: normal;
+  font-style: italic;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @media screen and (max-width: 768px) {

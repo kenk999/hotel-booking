@@ -41,21 +41,50 @@ const Hotel = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const { date = [], options = {} } = useContext(SearchContext) || {};
+  const { date = [], options = {}, city, dispatch } = useContext(SearchContext) || {};
 
-  // Default dates if not available in context
-  const today = new Date();
-  const tomorrow = new Date();
-  tomorrow.setDate(today.getTime() + 24 * 60 * 60 * 1000);
+  // Helper function to get default dates
+  const getDefaultDates = () => {
+    const today = new Date();
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+    return [{
+      startDate: today,
+      endDate: tomorrow,
+      key: "selection"
+    }];
+  };
+
+  // Get search parameters from navigation state or context
+  const passedSearchParams = location.state?.searchParams;
   
-  const defaultDates = [{
-    startDate: today,
-    endDate: tomorrow,
-    key: "selection"
-  }];
-
-  // Use context dates if available, otherwise use defaults
-  const dates = date && date.length > 0 ? date : defaultDates;
+  // Use passed parameters first, then context, then defaults
+  const dates = passedSearchParams?.dates || 
+                (date && date.length > 0 ? date : getDefaultDates());
+  
+  const searchOptions = passedSearchParams?.options || 
+                       (options.adult ? options : { adult: 1, children: 0, room: 1 });
+  
+  // Update context with the current search parameters to maintain consistency
+  useEffect(() => {
+    if (passedSearchParams) {
+      dispatch({
+        type: "NEW_SEARCH",
+        payload: {
+          city: city,
+          date: passedSearchParams.dates,
+          options: passedSearchParams.options
+        }
+      });
+    }
+  }, [passedSearchParams, city, dispatch]);
+  
+  // Ensure we have proper search parameters to maintain state
+  const searchParams = {
+    destination: city,
+    date: dates,
+    options: searchOptions
+  };
 
   // Process and prepare hotel images
   useEffect(() => {
@@ -170,6 +199,20 @@ const Hotel = () => {
             </div>
           )}
           <div className="hotelWrapper">
+            <div className="hotelNavigation">
+              <button 
+                className="backToList" 
+                onClick={() => navigate('/hotels', { 
+                  state: {
+                    destination: searchParams.destination,
+                    date: searchParams.date,
+                    options: searchParams.options
+                  }
+                })}
+              >
+                ← Back to search results
+              </button>
+            </div>
             <button className="bookNow" onClick={handleClick}>Reserve or Book Now!</button>
             <h1 className="hotelTitle">{data?.name || "Hotel Name"}</h1>
             <div className="hotelAddress">
@@ -180,7 +223,7 @@ const Hotel = () => {
               Excellent location – {data?.distance || "0"}m from center
             </span>
             <span className="hotelPriceHighlight">
-              Book a stay over ${data?.cheapestPrice || "0"} at this property and get a
+              Book a stay over ₹{data?.cheapestPrice || "0"} at this property and get a
               free airport taxi
             </span>
             <div className="hotelImages">
@@ -207,7 +250,7 @@ const Hotel = () => {
                   excellent location score of 9.8!
                 </span>
                 <h2>
-                  <b>${days * (data?.cheapestPrice || 0) * (options?.room || 1)}</b> ({days}{" "}
+                  <b>₹{(days * (data?.cheapestPrice || 0) * (searchOptions?.room || 1)).toLocaleString()}</b> ({days}{" "}
                   nights)
                 </h2>
                 <button onClick={handleClick}>Reserve or Book Now!</button>

@@ -21,15 +21,23 @@ body {
   height: 250px;
   flex:1;
   cursor: pointer;
-  
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featuredItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .featuredImg{
   width: 100%;
   height: 100%;
   object-fit: cover;
-  
+  transition: transform 0.3s ease;
+}
 
+.featuredItem:hover .featuredImg {
+  transform: scale(1.05);
 }
 
 .featuredTitles {
@@ -51,6 +59,11 @@ body {
   right: 0; bottom: 0;
   background: rgba(0, 0, 0, 0.4); /* black with 40% opacity */
   z-index: 1;
+  transition: background 0.3s ease;
+}
+
+.featuredItem:hover::after {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 /* ✅ Make text sit on top of overlay */

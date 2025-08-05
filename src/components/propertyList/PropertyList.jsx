@@ -1,10 +1,13 @@
 import useFetch from "../../hooks/useFetch";
 import "./propertyList.css"
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { SearchContext } from "../../context/SearchContext.jsx";
 
 const PropertyList = () => {
   const { data, loading, error } = useFetch("/hotels/countByType");
   const navigate = useNavigate();
+  const { dispatch } = useContext(SearchContext);
 
   // Default dates: today and tomorrow
   const today = new Date();
@@ -32,12 +35,23 @@ const PropertyList = () => {
   ];
 
   const handleTypeClick = (type) => {
-    navigate("/hotels", {
-      state: {
-        destination: "",
-        type: type,
+    // Clear search context for universal property type search
+    dispatch({
+      type: "NEW_SEARCH",
+      payload: {
+        city: "", // Explicitly clear city for universal search
         date: defaultDates,
         options: defaultOptions
+      }
+    });
+    
+    navigate("/hotels", {
+      state: {
+        destination: "", // Explicitly set empty destination
+        type: type,
+        date: defaultDates,
+        options: defaultOptions,
+        isUniversalSearch: true // Flag to indicate this is a universal property type search
       }
     });
   };

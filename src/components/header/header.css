@@ -29,12 +29,27 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.headerListItem:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
 
 .headerListItem.active {
-  border: 2px solid yellow;
+  border: 2px solid #febb02;
+  background-color: rgba(254, 187, 2, 0.1);
   padding: 10px;
   border-radius: 20px;
+}
+
+.headerListItem.active:hover {
+  background-color: rgba(254, 187, 2, 0.2);
+  transform: translateY(-2px);
 }
 
 .headerDesc {
@@ -45,11 +60,17 @@
   background-color: #0071c2;
   color: white;
   font-weight: 500;
-  border-radius:2px;
+  border-radius: 4px;
   border: none;
-  padding: 10px;
+  padding: 10px 20px;
   cursor: pointer;
   font-family: "Inter";
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.headerBtn:hover {
+  background-color: #005bb5;
+  transform: translateY(-1px);
 }
 
 .headerSearch {
@@ -126,6 +147,13 @@
   color: #0071c2;
   cursor: pointer;
   background-color: white;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.optionCounterButton:hover:not(:disabled) {
+  background-color: #f0f8ff;
+  transform: scale(1.05);
 }
 
 .optionCounterButton:disabled {
@@ -148,9 +176,15 @@
   margin-top: -0.5px; 
   left:35px;
   margin-top: -1px;  
-
   font-family: 'Inter', sans-serif;
   font-size: 17px;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.headerBut:hover {
+  background-color: #005bb5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .userInfo {
